@@ -25,7 +25,7 @@ router.get('/:userId',async(req,res)=>{
 //Ajouter des utilisateur
 
 //Modifier les users
-router.put('/:id',upload.single('image'),async(req,res)=>{
+router.put('/:id',authenticateUser,upload.single('image'),async(req,res)=>{
    const userId=req.params.id
    const { email, username, password,telephone } = req.body;
    const hashPass = bcrypt.hashSync(password, 10);
@@ -40,6 +40,7 @@ router.put('/:id',upload.single('image'),async(req,res)=>{
       telephone:telephone,
       password:hashPass,
       img:req.file.path
+      
      })
      res.status(200).json('utilisateur a ete mise jour avec succes')
      console.log(updateUser);

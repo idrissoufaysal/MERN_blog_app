@@ -1,0 +1,58 @@
+*{
+  margin: 0;
+  padding: 0;
+  
+
+  /*  LOGIn  */
+  .login{
+    background-color: aqua;
+    height: 450px;
+    max-width: 50%;
+    display: flex;
+    margin-left: 25%;
+    margin-top: 30px;
+    padding: 2px;
+    display: flex;
+    .right{
+      display: flex;
+      flex-direction: column;
+      background-color: rgb(126, 131, 201);
+      width: 50%;
+      h1{
+        letter-spacing: 2px;
+        color: white;
+        padding: 10px;
+      }
+      p{
+
+      }
+      button{
+        padding: 10px 20px;
+
+      }
+      
+    }
+    .left{
+      padding: 10px;
+      width: 50%;
+      background-color: rgb(240, 230, 237);
+      .form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 30px;
+        input{
+          border-style: none;
+          padding: 10px;
+          border-bottom: 1px solid black;
+        }
+        button{
+          padding: 10px 20px;
+          border: 1px solid rgb(185, 126, 23);
+       cursor: pointer;
+       
+        }
+      }
+    }
+  }
+}
