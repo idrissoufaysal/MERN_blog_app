@@ -1,5 +1,6 @@
 
 
+
 type Post={
 map(arg0: (post: Post) => void): import("react").ReactNode
 img:string,
@@ -12,9 +13,6 @@ type User={
     username:string,
     img:string,
 }
-
-
-
 
 export default function Post(Posts:Post) {
   return (

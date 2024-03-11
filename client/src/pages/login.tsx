@@ -1,19 +1,17 @@
+import { Link } from "react-router-dom"
 
 
 function Login() {
   return (
     <div className="login">
-        <div className="right">
-                <h1>Hello welcome</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque iste autem quid</p>
-                <button> </button>
-        </div>
         <div className="left">
+        <h2>Connectez-vous</h2>
             <div className="form">
 
            <input type="text" />
            <input type="password" />
            <button>Se connecter</button>
+           <p>vous n'avez pas de compte ? <Link className="links" to='/register'>Creer un compte</Link></p>
             </div>
         </div>
 
