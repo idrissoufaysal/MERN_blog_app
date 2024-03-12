@@ -17,8 +17,8 @@ $accent: #c4a681;
   /*  LOGIn  */
   .login {
     display: flex;
-   justify-content: center;
-    
+    justify-content: center;
+
     .left {
       align-items: center;
       justify-content: center;
@@ -102,46 +102,148 @@ $accent: #c4a681;
     min-width: 300px;
     display: flex;
     // align-items: center;
-     justify-content:center;
+    justify-content: center;
     margin: 30px 40px;
     gap: 30px;
     flex-wrap: wrap;
-    
+
     .post {
       border-radius: 05px;
       padding: 05px;
       width: 300px;
-     // background-color: $secondary;
-     // border: 1px solid $primary;
+      background-color: $background;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      opacity: $primary 0.2;
-      .userInfo{
+
+      .userInfo {
         display: flex;
         justify-content: start;
         gap: 10px;
-       // background-color: #c4a681;
+        // background-color: #c4a681;
         align-items: center;
         padding: 10px 0px;
         height: 30px;
-        img{
-         width: 40px;
+        img {
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           border: 1px solid $primary;
-          object-fit: contain;
-          
+          object-fit: cover;
         }
       }
-.postContent{
-  img{
-    height: 250px;
-    width: 300px;
-    object-fit: cover;
-    border-radius: 02px;
-
+      .postContent {
+        img {
+          height: 250px;
+          width: 300px;
+          object-fit: cover;
+          border-radius: 02px;
+        }
+      }
+    }
   }
 
-}
+  //Single
+  .single {
+    width: 90%;
+    margin: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    .img {
+      flex: 0;
+      img {
+        width: 500px;
+        border-radius: 2px;
+      }
+    }
+    .content {
+      width: 500px;
+      flex: 3;
+      p {
+        text-align: justify;
+      }
+    }
+    .user {
+      width: 500px;
+      align-items: center;
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
 
+      gap: 10px;
+      margin-bottom: 20px;
+      .userInfo {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        gap: 05px;
+        span {
+          font-weight:400 ;
+          font-style: italic;
+          //background-color: #a158b1;
+        }
+      }
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .button {
+        display: flex;
+        gap: 5px;
+        button {
+          padding: 05px;
+          gap: 5px;
+          border-radius: 5px;
+          border: 1px solid $primary;
+        }
+      }
+    }
+  }
+
+  //add
+  .add {
+    margin: 20px 10px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    .content {
+      flex: 5;
+      gap: 10px;
+      input {
+        border: 1px solid $primary;
+        padding: 10px;
+        margin-bottom: 10px;
+       width: 94%;
+        outline: none;
+      }
+      .editorContainer {
+        height: 300px;
+        border: 1px solid $primary;
+        min-width: 300px;
+
+        .editor {
+          overflow: scroll;
+          border: none;
+          height: 100%;
+        }
+      }
+    }
+    .menu {
+      flex: 10%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .file{
+        border: 1px solid $primary;
+        padding: 10px;
+        flex: 1;
+      }
     }
   }
 
