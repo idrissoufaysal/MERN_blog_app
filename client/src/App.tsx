@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Add from "./pages/Add";
 import Single from "./pages/Single";
+import UserInfo from "./pages/UserInfo";
 
 const Layout = () => {
   return (
@@ -42,6 +43,10 @@ function App() {
         {
           path: "/post/:id",
           element: <Single />,
+        },
+        {
+          path: "/user/:id",
+          element: <UserInfo />,
         },
         {
           path: "/",

@@ -1,6 +1,11 @@
 import img1 from "../assets/images/architecture-3121009_640.jpg";
 import img2 from "../assets/images/living-room-2569325_640.jpg";
 import userImage from "../assets/images/images (1).jpg";
+import man1 from "../assets/images/man4.jpg";
+import man2 from "../assets/images/man2.jpg";
+import man3 from "../assets/images/man3.jpg";
+import { Link } from "react-router-dom";
+
 
 type Post = {
 
@@ -17,6 +22,46 @@ type User = {
 
 export default function Home() {
   const userPosts = [
+    {
+      img: img1,
+      title: "Titre du post 1",
+      desc: "Description du post 1",
+      user: {
+        username: "ali",
+        img: man1,
+      },
+      date: new Date(),
+    },
+    {
+      img: img1,
+      title: "Titre du post 1",
+      desc: "Description du post 1",
+      user: {
+        username: "ali",
+        img: man2,
+      },
+      date: new Date(),
+    },
+    {
+      img: img1,
+      title: "Titre du post 1",
+      desc: "Description du post 1",
+      user: {
+        username: "ali",
+        img: man3,
+      },
+      date: new Date(),
+    },
+    {
+      img: img1,
+      title: "Titre du post 1",
+      desc: "Description du post 1",
+      user: {
+        username: "ali",
+        img: man1,
+      },
+      date: new Date(),
+    },
     {
       img: img1,
       title: "Titre du post 1",
@@ -45,10 +90,15 @@ export default function Home() {
      {userPosts.map((post: Post) => (
         <div key={post.title}>
           <div className="post">
+            <Link to='/user/:id' className="links">
+
             <div className="userInfo">
-              <img src={post.user?.img} alt={post.user?.username} />
+              <img className="img" src={post.user?.img} alt={post.user?.username} />
               <h3>{post.user?.username}</h3>
             </div>
+            </Link>
+            <Link to='/desc' className="links">
+
             <div className="postContent">
               <img src={post.img} alt="" />
               <div className="content">
@@ -56,6 +106,7 @@ export default function Home() {
                 <p>{post.desc}</p>
               </div>
             </div>
+            </Link>
           </div>
         </div>
       ))}

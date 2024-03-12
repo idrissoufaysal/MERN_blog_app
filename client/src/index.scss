@@ -99,14 +99,49 @@ $accent: #c4a681;
 
   //Home page
   .posts {
-    min-width: 400px;
+    min-width: 300px;
     display: flex;
-    flex-direction: column;
-    background-color: #a158b1;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+     justify-content:center;
     margin: 30px 40px;
+    gap: 30px;
+    flex-wrap: wrap;
+    
     .post {
+      border-radius: 05px;
+      padding: 05px;
+      width: 300px;
+     // background-color: $secondary;
+     // border: 1px solid $primary;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      opacity: $primary 0.2;
+      .userInfo{
+        display: flex;
+        justify-content: start;
+        gap: 10px;
+       // background-color: #c4a681;
+        align-items: center;
+        padding: 10px 0px;
+        height: 30px;
+        img{
+         width: 40px;
+          border-radius: 50%;
+          border: 1px solid $primary;
+          object-fit: contain;
+          
+        }
+      }
+.postContent{
+  img{
+    height: 250px;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 02px;
+
+  }
+
+}
+
     }
   }
 
