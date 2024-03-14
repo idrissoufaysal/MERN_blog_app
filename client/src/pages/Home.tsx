@@ -88,6 +88,17 @@ export default function Home() {
       },
       date: new Date(),
     },
+    {
+      id:6,
+      img: img2,
+      title: "Titre du post 2",
+      desc: "Description du post 2",
+      user: {
+        username: "maman",
+        img: userImage,
+      },
+      date: new Date(),
+    },
     // Ajoutez d'autres posts au besoin
   ];
 

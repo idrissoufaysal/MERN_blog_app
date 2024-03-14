@@ -22,7 +22,20 @@ export default function Add() {
           </label>
         </div>
         <div className="cat">
-d
+          <h1>Categorie</h1>
+          <label htmlFor="flutter">
+          <input type="radio" name='cat' value='flutter' id='flutter' />
+            Flutter</label>
+          <label htmlFor="flutter">
+          <input type="radio" name='cat' value='node' id='node' />
+            Node</label>
+          <label htmlFor="flutter">
+          <input type="radio" name='cat' value='react' id='react' />
+            React</label>
+          <label htmlFor="flutter">
+          <input type="radio" name='cat' value='autre' id='autre' />
+            Autre</label>
+
         </div>
       </div>
     </div>
