@@ -5,7 +5,10 @@ function Header() {
   return (
     <div className="header">
       <div className="logo"> 
+      <Link to='/'>
+
       <img src={logo} alt=""  width={100}/>
+      </Link>
       </div>
 
       <div className="cat">
