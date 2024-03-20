@@ -9,7 +9,7 @@ const authenticateUser = require("../utils/jwtAuth.js");
 
 router.get("/", async (req, res) => {
   try {
-    const post = await Post.findAll();
+    const post = await Post.findAll({ include:  User });
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
@@ -68,7 +68,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
   }
 });
 
-router.delete("/:id",authenticateUser, async (req, res) => {
+router.delete("/:id", authenticateUser, async (req, res) => {
   const postId = req.params.id;
   try {
     const existingPost = await Post.findByPk(postId);

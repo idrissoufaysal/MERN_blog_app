@@ -32,7 +32,7 @@ app.use('/post',postRoutes)
 app.use('/user',userRoutes)
 
 
-
+  
 //! Liaisons a la base de donnee mysql avec l'Orm Sequelize
 db.sync(/*{force:true}*/)
 .then(console.log('Connexion reussi a la base de donner '))

@@ -1,6 +1,6 @@
-import axios from "axios";
-import { ReactEventHandler, useState } from "react";
-import { Link, Navigate, useNavigate, useNavigation } from "react-router-dom";
+import Axios from "../utils/fecth";
+import {  useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 
 type User = {
@@ -25,15 +25,16 @@ const navigate=useNavigate()
     }));
   };
 
-
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
    e.preventDefault();
     try {
-      const res = await axios.post("/auth/register", inputs)
+      const res = await Axios.post("/auth/register", inputs)
       console.log(res)
+      console.log(res.data)
+
       navigate('/')
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error:any) {
+      console.log(error);
     }
   };
 

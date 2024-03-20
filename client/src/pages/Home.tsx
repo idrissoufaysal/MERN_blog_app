@@ -5,6 +5,9 @@ import man1 from "../assets/images/man4.jpg";
 import man2 from "../assets/images/man2.jpg";
 import man3 from "../assets/images/man3.jpg";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import Axios from "../utils/fecth";
 
 
 type Post = {
@@ -102,10 +105,26 @@ export default function Home() {
     // Ajoutez d'autres posts au besoin
   ];
 
+  const [post,setPost]=useState([])
+
+  const fetchData =async()=>{
+    try {
+      const res=await Axios.get(`/post`)
+      setPost(res.data)
+      console.log(res.data);
+      
+    } catch (error) {
+      
+    };
+  }
+  useEffect(()=>{
+   //fetchData()
+  })
+
   return (
     <div className="posts">
-     {userPosts.map((post: Post) => (
-        <div key={post.id}>
+     {userPosts.map((post: Post,index) => (
+        <div key={index}>
           <div className="post">
             <Link to='/user/:id' className="links">
 

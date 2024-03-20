@@ -62,12 +62,12 @@ $accent: #c4a681;
     min-width: 400px;
     display: flex;
     justify-content: space-around;
-   // align-items: center;
-  //  text-align: center;
+    // align-items: center;
+    //  text-align: center;
     margin-top: 10px;
-    
+
     img {
-      border-radius: 20%;
+      border-radius: 20px 50px 40px 50px;
     }
     .cat {
       display: flex;
@@ -78,7 +78,7 @@ $accent: #c4a681;
         font-size: 15px;
         font-weight: 400;
         transition: 200ms;
-        &:hover{
+        &:hover {
           //text-decoration: underline;
           color: $primary;
           border: 1px solid $primary;
@@ -110,9 +110,9 @@ $accent: #c4a681;
     min-width: 300px;
     display: flex;
     justify-content: center;
-    margin: 30px 10px ;
+    margin: 30px 10px;
     gap: 20px;
-    flex-wrap:  wrap;
+    flex-wrap: wrap;
 
     .post {
       border-radius: 05px;
@@ -186,7 +186,7 @@ $accent: #c4a681;
         display: flex;
         gap: 05px;
         span {
-          font-weight:400 ;
+          font-weight: 400;
           font-style: italic;
           //background-color: #a158b1;
         }
@@ -200,12 +200,32 @@ $accent: #c4a681;
       }
       .button {
         display: flex;
-        gap: 5px;
+        gap: 10px;
         button {
           padding: 05px;
           gap: 5px;
           border-radius: 5px;
           border: 1px solid $primary;
+        }
+        .edit {
+          height: 40px;
+          width: 40px;
+
+          background-color: rgba(0, 0, 255, 0.25);
+          border-radius: 50%;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+        }
+        .delete {
+          height: 40px;
+          width: 40px;
+
+          background-color: rgba(255, 0, 0, 0.3);
+          border-radius: 50%;
+          align-items: center;
+          display: flex;
+          justify-content: center;
         }
       }
     }
@@ -227,7 +247,7 @@ $accent: #c4a681;
         border: 1px solid $primary;
         padding: 10px;
         margin-bottom: 10px;
-       width: 94%;
+        width: 94%;
         outline: none;
       }
       .editorContainer {
@@ -247,27 +267,25 @@ $accent: #c4a681;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      .file{
+      .file {
         border: 1px solid $primary;
         padding: 10px;
         flex: 1;
       }
-      .cat{
+      .cat {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         background-color: #d6a4df;
         padding: 5px;
         border-radius: 3px;
-        h1{
+        h1 {
           font: 20px;
-          font-weight:500 ;
+          font-weight: 500;
         }
-        input{
-         
+        input {
           margin: 5px 10px;
         }
-        
       }
     }
   }
@@ -281,7 +299,7 @@ $accent: #c4a681;
     width: 98%;
     height: 120px;
     margin: 10px;
-
+    border-radius: 5px;
     justify-content: space-between;
     p {
       text-align: justify;
@@ -290,11 +308,10 @@ $accent: #c4a681;
     .cat {
       display: flex;
       flex-direction: column;
-      margin: 10px 20px;
+      margin: 10px 10px;
       gap: 10px;
-      background-color: $accent;
       h6 {
-        background-color: $accent;
+        
         height: 30px;
         width: 50px;
         border-radius: 20px;
@@ -305,7 +322,7 @@ $accent: #c4a681;
       height: 100px;
       width: 100px;
       img {
-        border-radius: 20%;
+        border-radius: 20px 50px 40px 50px;
         width: 100%;
       }
     }

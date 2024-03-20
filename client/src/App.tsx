@@ -1,9 +1,6 @@
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
-  BrowserRouter,
   Outlet,
 } from "react-router-dom";
 import "./index.scss";

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import logo from "../assets/images/images (1).jpg"
+import logo from "../assets/images/Red Purple Modern Minimalist Initial AS Letter Logo (1).png"
 
 function Header() {
   return (
@@ -7,15 +7,15 @@ function Header() {
       <div className="logo"> 
       <Link to='/'>
 
-      <img src={logo} alt=""  width={100}/>
+      <img src={logo} alt="" width={90} />
       </Link>
       </div>
 
       <div className="cat">
-        <Link to="" className="links"><h6>Flutter</h6></Link>
+        <Link to="/dart" className="links"><h6>Dart</h6></Link>
         <Link to="" className="links"><h6>Javascript</h6></Link>
-        <Link to="" className="links"><h6>Node</h6></Link>
-        <Link to="" className="links"><h6></h6></Link>
+        <Link to="" className="links"><h6>Python</h6></Link>
+        <Link to="" className="links"><h6>Autre</h6></Link>
        <span className="add"> <Link to='/add' className="links"> Ajouter</Link></span> 
       </div>
 
