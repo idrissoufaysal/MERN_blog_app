@@ -107,21 +107,27 @@ $accent: #c4a681;
 
   //Home page
   .posts {
-    min-width: 300px;
+    //min-width: 300px;
     display: flex;
-    justify-content: center;
-    margin: 30px 10px;
+    justify-content:center;
+    margin: 30px 0px;
     gap: 20px;
     flex-wrap: wrap;
 
     .post {
-      border-radius: 05px;
-      padding: 05px;
-      width: 300px;
+      border-radius: 75px 10px 70px 10px;
+      padding: 15px;
+      width: 370px;
       background-color: $background;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       align-self: self-end;
+      border: 5px solid rgba(161, 88, 177, 0.25);
 
+      .content{
+       // padding-left: 10px;
+        padding-bottom: 10px;
+        text-align: start;
+      }
       .userInfo {
         display: flex;
         justify-content: start;
@@ -141,9 +147,9 @@ $accent: #c4a681;
       .postContent {
         img {
           height: 250px;
-          width: 300px;
+          width: 100%;
           object-fit: cover;
-          border-radius: 02px;
+          border-radius: 10px 30px;
         }
       }
     }

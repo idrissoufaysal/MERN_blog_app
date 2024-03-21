@@ -18,8 +18,6 @@ function Header() {
         <Link to="" className="links"><h6>Autre</h6></Link>
        <span className="add"> <Link to='/add' className="links"> Ajouter</Link></span> 
       </div>
-
-
     </div>
   )
 }
