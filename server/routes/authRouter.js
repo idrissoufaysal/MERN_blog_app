@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const jwtSecrete = "fnidaf";
 const express = require("express");
+const dotenv=require('dotenv')
+dotenv.config()
 
 const router = express.Router();
 
@@ -15,7 +17,7 @@ router.post("/register", async (req, res) => {
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       return res
-        .status(401)
+        .status(201)
         .json({ message: `l'utilisateur ${user.email} existe dejas` });
     }
 
@@ -38,7 +40,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: email } });
     if (!user) {
-      return res.status(401).json({ message: "email ou mot de pass incorrect" });
+       res.status(401).json({ message: "email ou mot de pass incorrect" });
     }
     const isPass = await bcrypt.compare(password, user.password);
     if (!isPass) {

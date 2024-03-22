@@ -16,7 +16,6 @@ function Single() {
     date: new Date(),
   };
 const handleDelete=()=>{
- const i=  prompt('tu vas lir l\heur')
 }
 
   return (

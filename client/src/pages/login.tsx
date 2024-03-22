@@ -19,10 +19,10 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
   e.preventDefault()
   try {
        const res=await Axios.post("/auth/login",input)
-       console.log(res);
+       console.log(res.data);
        navigate('/')
        
-  } catch (error:any) {
+  } catch (error) {
       console.log(error);
       
   }
