@@ -1,6 +1,10 @@
 import {  ReactNode, createContext, useEffect, useState } from "react";
 import Axios from "../utils/fecth";
 
+type Input={
+  email:string,
+ password:string
+}
 export type User = {
   user: {
     id: number;
@@ -13,17 +17,26 @@ export type User = {
   };
   token: string;
 };
+
 interface AuthContextProps {
   children: ReactNode;
 }
-const AuthContext = createContext({});
+
+export interface AuthContextValue {
+  currentUser: User | null;
+  login: (inputs: Input) => Promise<void>;
+  logout: (inputs: User) => Promise<void>;
+}
+
+export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
 export const AuthContextProvider = ({ children}:AuthContextProps) => {
   const storedUser = localStorage.getItem("user");
   const initialUser = storedUser ? JSON.parse(storedUser) : null;
 
   const [currentUser, setCurrenUser] = useState<User | null>(initialUser);
 
-  const login = async (inputs: User) => {
+  const login = async (inputs: Input) => {
     const res = await Axios.post("/auth/login", inputs);
     setCurrenUser(res.data);
   };
@@ -43,3 +56,5 @@ export const AuthContextProvider = ({ children}:AuthContextProps) => {
     </AuthContext.Provider>
   );
 };
+
+export default AuthContext

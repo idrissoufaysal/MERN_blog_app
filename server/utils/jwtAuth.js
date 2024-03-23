@@ -8,7 +8,7 @@ const authenticateUser =async (req, res, next) => {
 
     if (!token) {
       console.log('Token non trouvé');
-      return res.status(401).json({ error: "Not logged in!" });
+      return res.status(401).json({ error: "Vous n'etes pas connecter" });
     }
 
     console.log(req.headers.authorization);
@@ -16,7 +16,7 @@ const authenticateUser =async (req, res, next) => {
    jwt.verify(token, "secretKey", (err, userInfo) => {
         if (err) {
             console.log('Erreur de vérification du token +', err);
-            return res.status(483).json({ error: "Token is not valid!" });
+            return res.status(483).json({ error: "Token non valide !" });
         }
 
         console.log('Token vérifié avec succès');

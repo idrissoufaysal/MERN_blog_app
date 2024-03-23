@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.scss";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -12,6 +8,7 @@ import Home from "./pages/Home";
 import Add from "./pages/Add";
 import Single from "./pages/Single";
 import UserInfo from "./pages/UserInfo";
+import { AuthContextProvider } from "./context/authContext";
 
 const Layout = () => {
   return (
@@ -64,7 +61,9 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <RouterProvider router={router} />
+        <AuthContextProvider>
+          <RouterProvider router={router} />
+        </AuthContextProvider>
       </div>
     </div>
   );

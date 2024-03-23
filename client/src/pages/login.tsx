@@ -1,6 +1,7 @@
-import { useState } from "react"
+import {  useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import Axios from "../utils/fecth"
+//import AuthContext from "../context/authContext"
+import { useAuth } from "../context/userHook"
 
 
 function Login() {
@@ -9,6 +10,11 @@ function Login() {
   email:"",
   password:""
  })
+
+ const { currentUser,login } = useAuth();
+        console.log(currentUser);
+
+
 const handlChange=(e:{target:{name:string,value:string}})=>{
 setInput((prev)=>(
   {...prev,[e.target.name]:e.target.value}
@@ -18,8 +24,7 @@ setInput((prev)=>(
 const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
   e.preventDefault()
   try {
-       const res=await Axios.post("/auth/login",input)
-       console.log(res.data);
+ await login(input)       
        navigate('/')
        
   } catch (error) {

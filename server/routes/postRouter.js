@@ -7,9 +7,13 @@ const upload = require("../utils/uploadFile.js");
 const { json } = require("sequelize");
 const authenticateUser = require("../utils/jwtAuth.js");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => { 
   try {
-    const post = await Post.findAll({ include:  User });
+    const post = await Post.findAll({ include:  {
+      model:User,
+      attributes:['id','username','email','telephone','img']
+    }
+    });
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
