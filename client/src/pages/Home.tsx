@@ -1,12 +1,5 @@
-import img1 from "../assets/images/architecture-3121009_640.jpg";
-import img2 from "../assets/images/living-room-2569325_640.jpg";
-import userImage from "../assets/images/images (1).jpg";
-import man1 from "../assets/images/man4.jpg";
-import man2 from "../assets/images/man2.jpg";
-import man3 from "../assets/images/man3.jpg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import Axios from "../utils/fecth";
 
 
@@ -131,8 +124,8 @@ export default function Home() {
     }
   }
   useEffect(()=>{
-   //fetchData()
-  })
+   fetchData()
+  },[])
 const networkImage:string='http://localhost:4000'
   return (
     <div className="posts">

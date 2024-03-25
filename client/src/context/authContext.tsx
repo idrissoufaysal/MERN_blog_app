@@ -23,9 +23,9 @@ interface AuthContextProps {
 }
 
 export interface AuthContextValue {
-  currentUser: User | null;
+  currentUser: User |null ;
   login: (inputs: Input) => Promise<void>;
-  logout: (inputs: User) => Promise<void>;
+  logout: (inputs: User |null) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -34,14 +34,14 @@ export const AuthContextProvider = ({ children}:AuthContextProps) => {
   const storedUser = localStorage.getItem("user");
   const initialUser = storedUser ? JSON.parse(storedUser) : null;
 
-  const [currentUser, setCurrenUser] = useState<User | null>(initialUser);
+  const [currentUser, setCurrenUser] = useState<User |null>(initialUser);
 
   const login = async (inputs: Input) => {
     const res = await Axios.post("/auth/login", inputs);
     setCurrenUser(res.data);
   };
 
-  const logout = async (inputs: User) => {
+  const logout = async (inputs: User |null) => {
     await Axios.post("/auth/logout", inputs);
     setCurrenUser(null);
   };

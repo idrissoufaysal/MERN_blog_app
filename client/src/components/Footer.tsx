@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/images/Red Purple Modern Minimalist Initial AS Letter Logo (1).png";
 
 export default function Footer() {

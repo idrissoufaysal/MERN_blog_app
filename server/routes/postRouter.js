@@ -7,12 +7,13 @@ const upload = require("../utils/uploadFile.js");
 const { json } = require("sequelize");
 const authenticateUser = require("../utils/jwtAuth.js");
 
-router.get("/", async (req, res) => { 
+router.get("/", async (req, res) => {
   try {
-    const post = await Post.findAll({ include:  {
-      model:User,
-      attributes:['id','username','email','telephone','img']
-    }
+    const post = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ["id", "username", "email", "telephone", "img"],
+      },
     });
     res.status(200).json(post);
   } catch (error) {
@@ -23,7 +24,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const postId = req.params.id;
   try {
-    const existingPost = await Post.findByPk(postId);
+    const existingPost = await Post.findByPk(postId, {
+      include: {
+        model: User,
+        attributes: ["id", "username", "email", "telephone", "img"],
+      },
+    });
     if (!existingPost) {
       return res.status(404).json({
         message: "Post introuvable",
@@ -38,6 +44,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", upload.single("image"), authenticateUser, async (req, res) => {
   const { title, desc, img } = req.body;
   try {
+    if (!req.file) {
+      return res.json("Ajouter un ficher");
+    }
     const newPost = await Post.create({
       title: title,
       desc: desc,
@@ -77,9 +86,7 @@ router.delete("/:id", authenticateUser, async (req, res) => {
   try {
     const existingPost = await Post.findByPk(postId);
     if (!existingPost) {
-      return res.status(404).json({
-        message: "Post introuvable",
-      });
+      return res.status(404).json("Post introuvable");
     }
     await existingPost.destroy();
     res.status(200).json("Post supprimer avec succes");
