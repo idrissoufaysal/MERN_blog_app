@@ -1,4 +1,5 @@
 const User = require("../models/user.js");
+const Post = require("../models/post.js");
 const express = require("express");
 const router = express.Router();
 const authenticateUser = require("../utils/jwtAuth.js");
@@ -14,9 +15,11 @@ router.get("/", async (req, res) => {
 //Afficher un utilisateur Specifique
 router.get("/:userId", async (req, res) => {
   const userId = req.params.userId;
+
   try {
-    const user = await User.findByPk(userId);
-    res.status(201).json(user);
+    const user = await User.findByPk(userId,{include:Post});
+    if(!user) return res.status(400).json('Utilisateur introuvable')
+    res.status(201).json(user);    
   } catch (e) {
     console.log(e);
   }

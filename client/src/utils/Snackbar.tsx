@@ -6,8 +6,9 @@ import  { useState } from "react";
 interface PropsType {
   message: string;
   severity: "success" | "error" | "warning" | "info";
+  onClose:VoidFunction 
 }
-const SnackbarAlert= ({ message, severity }:PropsType) => {
+const SnackbarAlert= ({ message, severity,onClose }:PropsType) => {
   const [open, setOpen] = useState(true);
 
   const handleClose = () => {
@@ -17,7 +18,7 @@ const SnackbarAlert= ({ message, severity }:PropsType) => {
     <Snackbar
       open={open}
       autoHideDuration={6000}
-      onClose={handleClose}
+      onClose={onClose}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: "100%" }}>

@@ -4,7 +4,6 @@ import { useAuth } from "../context/userHook";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-
 function Header() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
@@ -39,26 +38,39 @@ function Header() {
           <h6>Autre</h6>
         </Link>
 
-       {currentUser? <div>
-        <Link to="/add" className="links">
-          <Button variant="contained" color="primary"   sx={{backgroundColor:"#a158b1",color:"white",textTransform:"capitalize"}}>
-            Ajouter
-          </Button>
-        </Link>
-          <h6>{currentUser?.user.email}</h6>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleLogout}
-            endIcon={<LogoutIcon />}
-            sx={{textTransform:"lowercase"}}
-          >
-          </Button>
-        </div> : <Link to="login">
-          <Button variant="contained" color="secondary">
-            Se connecter
-          </Button>
-          </Link>}
+        {currentUser ? (
+          <div>
+            <Link to="/add" className="links">
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  backgroundColor: "#a158b1",
+                  color: "white",
+                  textTransform: "capitalize",
+                }}
+              >
+                Ajouter
+              </Button>
+            </Link>
+            <Link className="links" to={`/user/${currentUser.user.id}`}>
+              <h6>{currentUser?.user.email}</h6>
+            </Link>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleLogout}
+              endIcon={<LogoutIcon />}
+              sx={{ textTransform: "lowercase" }}
+            ></Button>
+          </div>
+        ) : (
+          <Link to="login">
+            <Button variant="contained" color="secondary">
+              Se connecter
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

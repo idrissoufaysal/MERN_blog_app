@@ -2,6 +2,7 @@ const express=require('express');
 const db= require('./db/db.js')
 const User=require('./models/user.js')
 const Post=require('./models/post.js')
+const Favorie=require('./models/Favorie.js')
 
 require('dotenv').config()
 const cors=require('cors')
@@ -11,6 +12,7 @@ const dotenv=require('dotenv')
 const authRouter=require('./routes/authRouter.js')
 const postRoutes=require('./routes/postRouter.js')
 const userRoutes=require('./routes/userRouter.js')
+const favorieRouter=require('./routes/favorieRouter.js')
 
 //! laison des tables
 require('./models/index.js')
@@ -30,6 +32,7 @@ app.use(express.static("public"))
 app.use('/auth',authRouter)
 app.use('/post',postRoutes)
 app.use('/user',userRoutes)
+app.use('/favorie',favorieRouter)
 
 
   

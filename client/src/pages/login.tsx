@@ -30,7 +30,9 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
     if(input.email=="" || input.password==""){
   return  setOpen(true)
     }
- await login(input)       
+ const res=await login(input)    
+ console.log(res);
+    
        navigate('/')
        
   } catch (error) {
@@ -42,7 +44,7 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
   return (
     <div className="login">
-            {open && <SnackbarAlert message='Veuiller remplir tous les champs' severity="warning"/>}
+            {open && <SnackbarAlert message='Veuiller remplir tous les champs' severity="warning" onClose={()=>{setOpen(false)}}/>}
 
         <div className="left">
         <h2>Connectez-vous</h2>

@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const jwtSecrete = "fnidaf";
 const express = require("express");
-const dotenv=require('dotenv')
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 const router = express.Router();
 
@@ -29,6 +29,7 @@ router.post("/register", async (req, res) => {
 
     res.status(200).json({ message: "Compte cree avec success" });
   } catch (error) {
+    res.status(500).json(error);
     console.log(error);
   }
 });
@@ -40,11 +41,11 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: email } });
     if (!user) {
-       res.status(401).json({ message: "email ou mot de pass incorrect" });
+     return res.status(404).json({ message: "l'utilisateur n'existe pas" });
     }
     const isPass = await bcrypt.compare(password, user.password);
     if (!isPass) {
-      return res.status(400).json({ message: "email ou mot de pass incorrect" });
+      return res.status(404).json({ message: "le mot de pass est incorrect" });
     } else {
       const token = jwt.sign({ id: user.id }, "secretKey");
       const { password, ...other } = user.dataValues;
@@ -59,6 +60,7 @@ router.post("/login", async (req, res) => {
         });
     }
   } catch (error) {
+    res.status(500).json(error);
     console.log(error);
   }
 });

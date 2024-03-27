@@ -59,7 +59,7 @@ router.post("/", upload.single("image"), authenticateUser, async (req, res) => {
   }
 });
 
-router.put("/:id", upload.single("image"), async (req, res) => {
+router.put("/:id", upload.single("image"), authenticateUser,async (req, res) => {
   const postId = req.params.id;
   const { title, desc } = req.body;
   try {
@@ -69,10 +69,11 @@ router.put("/:id", upload.single("image"), async (req, res) => {
         message: "Post introuvable",
       });
     }
+   
     existingPost.update({
       title: title,
       desc: desc,
-      img: req.file.path,
+      img: req.file?  req.file.path:existingPost.img,
       userId: req.userInfo.id,
     });
     res.status(200).json("Post mise a jour avec succes");

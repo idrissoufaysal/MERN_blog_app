@@ -9,6 +9,7 @@ import Add from "./pages/Add";
 import Single from "./pages/Single";
 import UserInfo from "./pages/UserInfo";
 import { AuthContextProvider } from "./context/authContext";
+import Update from "./pages/update";
 
 const Layout = () => {
   return (
@@ -39,7 +40,11 @@ function App() {
           element: <Single />,
         },
         {
-          path: "/user/:id",
+          path: "/edit/:id",
+          element: <Update />,
+        },
+        {
+          path: "/user/:userId",
           element: <UserInfo />,
         },
         {

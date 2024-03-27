@@ -1,6 +1,7 @@
 import Axios from "../utils/fecth";
 import {  useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import SnackbarAlert from "../utils/Snackbar";
 
 
 type User = {
@@ -10,6 +11,8 @@ type User = {
 };
 
 function Register() {
+
+  const [open, setOpen] = useState(false);
   const [inputs, setInputs] = useState<User>({
     username: "",
     email: "",
@@ -28,18 +31,24 @@ const navigate=useNavigate()
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
    e.preventDefault();
     try {
+
+      if(inputs.email=="" || inputs.password=="" || inputs.username==""){
+        return  setOpen(true)
+          }
       const res = await Axios.post("/auth/register", inputs)
       console.log(res)
       console.log(res.data)
 
       navigate('/')
-    } catch (error:any) {
+    } catch (error) {
       console.log(error);
     }
   };
 
   return (
     <div className="login">
+                  {open && <SnackbarAlert message='Veuiller remplir tous les champs' severity="warning" onClose={()=>{setOpen(false)}}/>}
+
       <div className="left">
         <h2>Inscrivez-vous</h2>
         <div className="form">

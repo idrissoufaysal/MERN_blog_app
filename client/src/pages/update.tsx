@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Axios from "../utils/fecth";
 import { useAuth } from "../context/userHook";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SnackbarAlert from "../utils/Snackbar";
 
 
-export default function Add() {
+
+export default function Update() {
   // const [value, setValue] = useState({
   //   title: "",
   //   desc: "",
   // });
-  const navigate = useNavigate();
-  const { currentUser } = useAuth();
 
+  const navigate = useNavigate();
+  const location=useLocation();
+  const { currentUser } = useAuth();
+  const postId = location.pathname.split("/")[2];
+  //const [post, setPost] = useState<Post>();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [open, setOpen] = useState(false);
@@ -45,39 +49,56 @@ export default function Add() {
   const handleSubmite = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      const res = await Axios.post("/post", formData, {
+      const res = await Axios.put(`/post/${postId}`, formData, {
         headers: {
           Authorization: "Bearer " + currentUser?.token,
         },
       });
       console.log(res);
       setOpen(true)
+      console.log(res.data);
+      
       setTimeout(() => {
       
-        navigate("/");
+        navigate("/post/"+postId);
       }, 2000);
 
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await Axios.get(`/post/${postId}`);
+        setTitle(res.data.title);
+        setDesc(res.data.desc);
+        setImg(res.data.img);
+        console.log(res.data);
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [postId]);
+
 
   return (
     <div className="add">
-      {open && <SnackbarAlert message="Post ajouter avec succes" severity="success" onClose={()=>{setOpen(false)}}/>}
+      {open && <SnackbarAlert message="Post mise a jour avec succes" severity="success" onClose={()=>{setOpen(false)}}/>}
       <div className="content">
         <input
           type="text"
           placeholder="title"
-          onChange={(e: { target: { value: string } }) => {
-            setTitle(e.target.value);
-          }}
+          value={title}
+          onChange={(e)=>setTitle(e.target.value)}
         />
         <div className="editorContainer">
           <ReactQuill
             className="editor"
             theme="snow"
-            value={desc}
+           value={desc}
             onChange={(value: string) => {
               setDesc(value);
             }}
@@ -92,15 +113,15 @@ export default function Add() {
             role={undefined}
             variant="outlined"
             sx={{
-              border: "2px solid #a158b1",
-              color: "#a158b1",
+                border: "2px solid #a158b1",
+                color: "#a158b1",
             }}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
             //
           >
-            <input type="file" name="file" id="file" className="uploadFile" onChange={handleFile} />
-           
+            <input type="file" name="file" className="uploadFile"  id="file" onChange={handleFile} />
+            
           </Button>
         </div>
         <div className="cat">
@@ -131,7 +152,7 @@ export default function Add() {
           }}
           onClick={handleSubmite}
         >
-          Ajouter
+          Modifier
         </Button>
       </div>
     </div>
