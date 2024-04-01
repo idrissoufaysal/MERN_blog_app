@@ -10,6 +10,7 @@ import Single from "./pages/Single";
 import UserInfo from "./pages/UserInfo";
 import { AuthContextProvider } from "./context/authContext";
 import Update from "./pages/update";
+import Profile from "./pages/Profile";
 
 const Layout = () => {
   return (
@@ -46,6 +47,10 @@ function App() {
         {
           path: "/user/:userId",
           element: <UserInfo />,
+        },
+        {
+          path: "/profile/:userId",
+          element: <Profile/>,
         },
         {
           path: "/",

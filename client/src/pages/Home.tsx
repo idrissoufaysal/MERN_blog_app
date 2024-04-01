@@ -33,7 +33,7 @@ export default function Home() {
     return imgPath?.replace("public\\", "");
   }
 
-  const getText = (html: string): string => {
+   const getText = (html: string): string => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
@@ -74,10 +74,17 @@ export default function Home() {
                   <span>{post.user?.username}</span>
                 </div>
               </Link>
-              <button
+              <div
                 className="favorie"
-                style={{ borderStyle: "none" }}
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                style={
+                  exitF(post.id)
+                    ? { backgroundColor: "#a158b1",
+                  border:'1px solid #a158b1'
+                  }
+                    : { backgroundColor: "" }
+                    
+                }
+                onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.preventDefault();
                   addOrRemoveFavorite(
                     { postId: post.id, userId: currentUser?.user.id },
@@ -90,15 +97,14 @@ export default function Home() {
                 <BookmarkBorderIcon
                   sx={
                     exitF(post.id)
-                      ? { backgroundColor: "yellow" }
-                      : { backgroundColor: "" }
+                      ? { backgroundColor: "#a158b1",color:"#ffff" }
+                      : { color: "rgb(24, 12, 26,0.7)" }
                       
                   }
-                  color="info"
                 />
                 
 
-              </button>
+              </div>
             </div>
             <Link to={`/post/${post.id}`} className="links">
               <div className="postContent">

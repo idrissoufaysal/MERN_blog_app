@@ -53,7 +53,7 @@ function Header() {
                 Ajouter
               </Button>
             </Link>
-            <Link className="links" to={`/user/${currentUser.user.id}`}>
+            <Link className="links" to={`/profile/${currentUser.user.id}`}>
               <h6>{currentUser?.user.email}</h6>
             </Link>
             <Button

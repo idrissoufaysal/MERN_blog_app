@@ -1,10 +1,9 @@
 
-import EditIcon from "@mui/icons-material/Edit";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Axios from "../utils/fecth";
 import { useEffect, useState } from "react";
 
-interface UserInfo {
+export interface UserInfo {
   id: number;
   username: string;
   email: string;
@@ -15,7 +14,7 @@ interface UserInfo {
   updatedAt: string;
   posts: UserPost[];
 }
-interface UserPost {
+export interface UserPost {
   id: number;
   title: string;
   desc: string;
@@ -37,6 +36,11 @@ export default function UserInfo() {
   }
   const networkImage: string = "http://localhost:4000";
 
+  const getText = (html: string): string => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,18 +59,22 @@ export default function UserInfo() {
   return (
     <div className="profile">
         
-         <div className="profileImage">
+         <div className="profileInfo">
             <img src={`${networkImage}/${removePublicPath(userInfo?.img)}`} alt="" />
-            <EditIcon className="editIcon" color="inherit" />
             <h2>{userInfo?.email} </h2>
+            <h2>{userInfo?.username} </h2>
          </div>
-
+<h3>Tous mes posts</h3>
 <div className="userPost">
   {userInfo?.posts.map((post:UserPost)=>(
-     <div key={post.id}>
+    <Link to={`/post/${post.id}`} className="links">
+
+     <div key={post.id} className="post">
+            <img src={`${networkImage}/${removePublicPath(post.img)}`} alt="" />
         <h2>{post.title}</h2>
-      <h2>{post.desc}</h2>
+      <p>{getText(post.desc)}</p>
      </div>
+    </Link>
   ))}
 </div>
     </div>

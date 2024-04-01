@@ -6,8 +6,26 @@ interface FavorieItem {
   postId: number;
 }
 
+export interface FavorieArray {
+  id: number;
+  userId: number;
+  postId: number;
+  createdAt: string;
+  updatedAt: string;
+  post: Post;
+}
+interface Post {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: number;
+}
+
 interface FavorieStore {
-  favorie: FavorieItem[];
+  favorie: FavorieArray[] | FavorieItem[];
   loading: boolean;
   status: boolean;
   error: string | null | Error;
@@ -19,7 +37,7 @@ interface FavorieStore {
 }
 
 const useFavoriteStore = create<FavorieStore>((set) => ({
-  favorie: [],
+  favorie:[],
   loading: false,
   error: null,
   status: false,
@@ -32,7 +50,7 @@ const useFavoriteStore = create<FavorieStore>((set) => ({
           Authorization: "Bearer " + currentUser,
         },
       });
-      set({ favorie: response.data, loading: false });
+      set({ favorie: response.data as FavorieArray[] , loading: false });
     } catch (error) {
       console.error(error);
       set({ loading: false, error: "Erreur lors du chargement des favoris." });
@@ -51,7 +69,7 @@ const useFavoriteStore = create<FavorieStore>((set) => ({
 
       if(response.data.status===false){
         set((state) => ({
-          favorie: state.favorie.filter(ite => ite.postId !==item.postId),
+          favorie : state.favorie.filter(ite => ite.postId !==item.postId),
           loading: false,
           status:false
         }));

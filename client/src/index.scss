@@ -1,14 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-
-$color: #180c1a;
+$color: rgb(24, 12, 26);
 $background: #f9f4fa;
 $primary: #a158b1;
 $secondary: #d3aba1;
 $accent: #c4a681;
-body{
-  font-family:  "Poppins", sans-serif;
+body {
+  font-family: "Poppins", sans-serif;
 }
 * {
   margin: 0;
@@ -110,12 +108,82 @@ body{
       }
     }
   }
+  //user Profile
+  .profile{
+    display: flex;
+      flex-direction: column;
+      gap: 40px;
+      .userPost{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap:30px;
+        .post{
+          height: 300px;
+          width: 300px;
+          padding: 10px;
+          border-radius: 10px;
+          background-color: rgba(161, 88, 177, 0.15);
+          img{
+            width: 100%;
+          }
+        }
+      }
+    .profileInfo{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      img{
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        border: 05px solid rgb(24, 12, 26,0.35);
+      }
+    }
+  }
+
+  //my Profile
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .img {
+      background-color: #a158b1;
+      height: 150px;
+      width: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: relative;
+      img{
+        width: 100%;
+      }
+      .editIcon{
+position: absolute;
+right: 20px;
+bottom: 20px;
+border: 1px solid #fff;
+height: 30px;
+width: 30px;
+padding: 3px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+
+      }
+    }
+  }
 
   //Home page
   .posts {
     //min-width: 300px;
     display: flex;
-    justify-content:center;
+    justify-content: center;
     margin: 30px 0px;
     gap: 20px;
     flex-wrap: wrap;
@@ -128,18 +196,22 @@ body{
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       align-self: self-end;
       border: 5px solid rgba(161, 88, 177, 0.25);
-.postHeader{
-  display: flex;
-  justify-content: space-between;
-}
-.favorie{
-  height: 45px;
-  width: 40px;
-  border-radius: 20px;
-  background-color: rgba(161, 88, 177, 0.25);
-}
-      .content{
-       // padding-left: 10px;
+      .postHeader {
+        display: flex;
+        justify-content: space-between;
+      }
+      .favorie {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 35px;
+        border: 1px solid $color;
+        border-radius: 10px;
+        //background-color: rgba(161, 88, 177, 0.25);
+      }
+      .content {
+        // padding-left: 10px;
         padding-bottom: 10px;
         text-align: start;
       }
@@ -182,7 +254,7 @@ body{
     .img {
       flex: 0;
       img {
-       max-width:500px;
+        max-width: 500px;
         border-radius: 2px;
       }
     }
@@ -262,7 +334,7 @@ body{
     align-items: center;
     align-self: center;
     justify-self: center;
-    .uploadFile{
+    .uploadFile {
       text-decoration: none;
       border-style: none;
     }
@@ -337,7 +409,6 @@ body{
       margin: 10px 10px;
       gap: 10px;
       h6 {
-        
         height: 30px;
         width: 50px;
         border-radius: 20px;

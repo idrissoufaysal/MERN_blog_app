@@ -39,7 +39,7 @@ const navigate=useNavigate()
       console.log(res)
       console.log(res.data)
 
-      navigate('/')
+      navigate('/login')
     } catch (error) {
       console.log(error);
     }
