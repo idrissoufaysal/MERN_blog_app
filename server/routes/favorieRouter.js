@@ -42,6 +42,7 @@ router.post("/", authenticateUser, async (req, res) => {
   try {
     const fav = await Favorie.findOne({
       where: { postId: postId, userId: req.userInfo.id },
+      include:Post
     });
     if (fav) {
       fav.destroy();
@@ -55,7 +56,7 @@ router.post("/", authenticateUser, async (req, res) => {
       postId: postId,
       userId: req.userInfo.id,
       ok:true
-    });
+    },{include:Post});
     res.status(200).json({
       status: true,
       message: "vous avez ajouter au favorie avec succes",

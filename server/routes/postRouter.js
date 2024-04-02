@@ -14,6 +14,7 @@ router.get("/", async (req, res) => {
         model: User,
         attributes: ["id", "username", "email", "telephone", "img"],
       },
+      order:[["createdAt", "DESC"]]
     });
     res.status(200).json(post);
   } catch (error) {

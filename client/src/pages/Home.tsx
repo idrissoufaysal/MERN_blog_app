@@ -4,6 +4,8 @@ import Axios from "../utils/fecth";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import useFavoriteStore from "../states/favoris";
 import { useAuth } from "../context/userHook";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import truncateDescription from "../utils/function";
 // import { AxiosError } from "axios";
 
 export interface Post {
@@ -26,21 +28,24 @@ export interface Post {
 export default function Home() {
   const [post, setPost] = useState([]);
   const { currentUser } = useAuth();
-  const { addOrRemoveFavorite, favorie } = useFavoriteStore();
+  const { addOrRemoveFavorite, favorie, status } = useFavoriteStore();
 
   //fonction
   function removePublicPath(imgPath: string | undefined) {
     return imgPath?.replace("public\\", "");
   }
 
-   const getText = (html: string): string => {
+  const getText = (html: string): string => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
   const exitF = (pId: number) => {
-    const existing = favorie.find(favorite => favorite.postId === pId && favorite.userId === currentUser?.user.id);
+    const existing = favorie.find(
+      (favorite) =>
+        favorite.postId === pId && favorite.userId === currentUser?.user.id
+    );
     console.log(existing);
-    
+
     return existing;
   };
 
@@ -66,11 +71,11 @@ export default function Home() {
             <div className="postHeader">
               <Link to={`/user/${post.user.id}`} className="links">
                 <div className="userInfo">
-                  <img
+                 {post.user?.img? <img
                     className="img"
                     src={`${networkImage}/${removePublicPath(post.user?.img)}`}
                     alt={post.user?.username}
-                  />
+                  />:<AccountCircleRoundedIcon fontSize="large"/>}
                   <span>{post.user?.username}</span>
                 </div>
               </Link>
@@ -78,32 +83,34 @@ export default function Home() {
                 className="favorie"
                 style={
                   exitF(post.id)
-                    ? { backgroundColor: "#a158b1",
-                  border:'1px solid #a158b1'
-                  }
+                    ? {
+                        backgroundColor: "#a158b1",
+                        border: "1px solid #a158b1",
+                      }
                     : { backgroundColor: "" }
-                    
                 }
                 onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                   e.preventDefault();
                   addOrRemoveFavorite(
-                    { postId: post.id, userId: currentUser?.user.id },
+                    {
+                      postId: post.id,
+                      userId: currentUser?.user.id,
+                      id: 0,
+                      createdAt: "",
+                      updatedAt: "",
+                      post: post
+                    },
                     currentUser?.token
                   );
-                               
                 }}
               >
-
                 <BookmarkBorderIcon
                   sx={
                     exitF(post.id)
-                      ? { backgroundColor: "#a158b1",color:"#ffff" }
+                      ? { backgroundColor: "#a158b1", color: "#ffff" }
                       : { color: "rgb(24, 12, 26,0.7)" }
-                      
                   }
                 />
-                
-
               </div>
             </div>
             <Link to={`/post/${post.id}`} className="links">
@@ -114,7 +121,7 @@ export default function Home() {
                 />
                 <div className="content">
                   <h2>{post.title}</h2>
-                  <p>{getText(post.desc)}</p>
+                  <p>{truncateDescription(getText(post.desc), 100)}</p>
                 </div>
               </div>
             </Link>

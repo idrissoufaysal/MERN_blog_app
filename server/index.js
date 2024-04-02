@@ -33,7 +33,7 @@ app.use('/auth',authRouter)
 app.use('/post',postRoutes)
 app.use('/user',userRoutes)
 app.use('/favorie',favorieRouter)
-
+ 
 
   
 //! Liaisons a la base de donnee mysql avec l'Orm Sequelize

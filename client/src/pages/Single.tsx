@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Axios from "../utils/fecth";
 import { useAuth } from "../context/userHook";
 import SnackbarAlert from "../utils/Snackbar";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 
 function Single() {
   const [post, setPost] = useState<Post>();
@@ -76,11 +77,11 @@ function Single() {
         <img src={`${networkImage}/${removePublicPath(post?.img)}`} alt="" />
         <div className="user">
           <div className="userInfo">
-            <img
-              className="userImage"
-              src={`${networkImage}/${removePublicPath(post?.user.img)}`}
-              alt=""
-            />
+          {post?.user.img ? <img
+                    className="img"
+                    src={`${networkImage}/${removePublicPath(post.user?.img)}`}
+                    alt={post.user?.username}
+                  />:<AccountCircleRoundedIcon fontSize="large"/>}
             <span>{post?.user.username} </span>
           </div>
          {currentUser?.user.email==post?.user.email && <div className="button">

@@ -3,9 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import Axios from "../utils/fecth";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/userHook";
-import useFavoriteStore, { FavorieArray } from "../states/favoris";
-import PersonIcon from "@mui/icons-material/Person";
-import PostCard from "../components/userPost";
+import useFavoriteStore, {  } from "../states/favoris";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import truncateDescription from "../utils/function";
+import Button from '@mui/material/Button'
+import { Post } from "./Home";
 
 interface UserInfo {
   id: number;
@@ -34,8 +36,7 @@ export default function Profile() {
   const userId = location.pathname.split("/")[2];
   console.log(userId);
   const [userInfo, setUserInfo] = useState<UserInfo>();
-  const [img, setImg] = useState<File | string>();
-  const { addOrRemoveFavorite, favorie, fetchFavorites } = useFavoriteStore();
+  const { favorie, fetchFavorites,addOrRemoveFavorite } = useFavoriteStore();
 
   function removePublicPath(imgPath: string | undefined) {
     return imgPath?.replace("public\\", "");
@@ -56,12 +57,22 @@ export default function Profile() {
     fetchData(); 
   }, [currentUser?.token, currentUser?.user.id, fetchFavorites]);
 
-  const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setImg(event.target.files[0]);
-      console.log(img);
-    }
-    //  const file = event.target.files[0].toString();
+  const deleFav=(event: React.MouseEvent<HTMLButtonElement>,pId:number,p:Post)=>{
+event.preventDefault()
+   addOrRemoveFavorite({
+     userId: currentUser?.user.id,
+     postId: pId,
+     post: p,
+     id: 0,
+     createdAt: "",
+     updatedAt: ""
+   },currentUser?.token)
+
+  }
+
+  const getText = (html: string): string => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent || "";
   };
 
   return (
@@ -69,51 +80,44 @@ export default function Profile() {
       <div className="profileImage">
         <div className="img">
           {!currentUser?.user.img ? (
-            <PersonIcon sx={{ color: "#fff" }} />
-          ) : (
+            <AccountCircleRoundedIcon sx={{ fontSize:'150px' }} />
+          ) : ( currentUser &&
             <img
               src={`${networkImage}/${removePublicPath(userInfo?.img)}`}
               alt=""
             />
           )}
-          {/* <input
-            type="file"
-            onChange={handleFile}
-            onClick={async (e: React.MouseEventHandler<HTMLInputElement>) => {
-              e.preventDefault();
-              try {
-                const res = await Axios.post(`/upload/${userId}`, img, {
-                  headers: { Authorization: "Bearer " + currentUser?.token },
-                });
-                console.log(res.data);
-              } catch (error) {
-                console.log(error);
-              }
-            }}
-          /> */}
-
+         
           <EditIcon className="editIcon" sx={{ color: "#fff" }} />
         </div>
         <h2>{userInfo?.email} </h2>
-        <h2>{userInfo?.username} </h2>
+        <h3>{userInfo?.username} </h3>
         <h2>{userInfo?.telephone && userInfo?.telephone} </h2>
       </div>
 
+     <h3>Mes Favories ({favorie.length})</h3>
       <div className="userPost">
-        {userInfo?.posts.map((post: UserPost) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <h2>{post.desc}</h2>
-          </div>
-        ))}
-      </div>
-      <div className="fav">
-        {favorie.map(() => (
-            
-          <h1>{}</h1>
+  {favorie.map((f)=>(
+    <div>
 
-        ))}
+
+     <div key={f.id} className="post">
+    <Link to={`/post/${f.postId}`} className="links">
+      <div>
+
+            {f.post && <img src={`${networkImage}/${removePublicPath(f.post.img)}`} style={{objectFit:'cover'}} alt="" />}
+        <h2>{f.post?.title}</h2>
+      <p>{truncateDescription(getText(f.post?.desc), 100)}</p>
       </div>
+    </Link>
+    
+    <Button variant="outlined" onClick={(event)=> deleFav(event,f.postId,f.post)} color="error">
+      Retirer
+    </Button>
+     </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 }

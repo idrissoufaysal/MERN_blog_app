@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import Axios from "../utils/fecth";
 
-interface FavorieItem {
-  userId: number | undefined;
-  postId: number;
-}
+// interface faveItem{
+//   userId:number,
+//   postId:number
+// }
 
 export interface FavorieArray {
   id: number;
-  userId: number;
+  userId: number | undefined;
   postId: number;
   createdAt: string;
   updatedAt: string;
@@ -25,19 +25,19 @@ interface Post {
 }
 
 interface FavorieStore {
-  favorie: FavorieArray[] | FavorieItem[];
+  favorie: FavorieArray[];
   loading: boolean;
   status: boolean;
   error: string | null | Error;
   addOrRemoveFavorite: (
-    item: FavorieItem,
+    item: FavorieArray,
     currentUser: string | undefined
   ) => Promise<void>;
   fetchFavorites: (currentUser: string | undefined) => Promise<void>;
 }
 
 const useFavoriteStore = create<FavorieStore>((set) => ({
-  favorie:[],
+  favorie:[] as FavorieArray[],
   loading: false,
   error: null,
   status: false,
@@ -50,6 +50,8 @@ const useFavoriteStore = create<FavorieStore>((set) => ({
           Authorization: "Bearer " + currentUser,
         },
       });
+      if(response.data.ok){ return set({status:true})}
+      //else{return set({status:false})}
       set({ favorie: response.data as FavorieArray[] , loading: false });
     } catch (error) {
       console.error(error);

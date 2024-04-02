@@ -3,6 +3,8 @@ import logo from "../assets/images/Red Purple Modern Minimalist Initial AS Lette
 import { useAuth } from "../context/userHook";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+
 
 function Header() {
   const { currentUser, logout } = useAuth();
@@ -16,6 +18,13 @@ function Header() {
       console.log(error);
     }
   };
+
+  function removePublicPath(imgPath: string | undefined) {
+    return imgPath?.replace("public\\", "");
+  }
+  const networkImage: string = "http://localhost:4000";
+
+
   return (
     <div className="header">
       <div className="logo">
@@ -54,7 +63,17 @@ function Header() {
               </Button>
             </Link>
             <Link className="links" to={`/profile/${currentUser.user.id}`}>
+              <div className="userInfo" style={{display:'flex',alignItems:'center'}}>
+              {!currentUser?.user.img ? (
+            <AccountCircleRoundedIcon sx={{ fontSize:'30px' }} />
+          ) : ( currentUser &&
+            <img style={{width:'40px',height:'40px',borderRadius:"50%"}}
+              src={`${networkImage}/${removePublicPath(currentUser.user.img)}`}
+              alt=""
+            />
+          )}
               <h6>{currentUser?.user.email}</h6>
+              </div>
             </Link>
             <Button
               variant="contained"
