@@ -186,11 +186,13 @@ justify-content: center;
   //Home page
   .posts {
     //min-width: 300px;
-    display: flex;
+    display: grid;
     justify-content: center;
     margin: 30px 0px;
     gap: 20px;
-    flex-wrap: wrap;
+    grid-template-columns:repeat(3,1fr);
+    
+    //flex-wrap: wrap;
 
     .post {
       border-radius: 10px;

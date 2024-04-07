@@ -65,7 +65,7 @@ function Header() {
             <Link className="links" to={`/profile/${currentUser.user.id}`}>
               <div className="userInfo" style={{display:'flex',alignItems:'center'}}>
               {!currentUser?.user.img ? (
-            <AccountCircleRoundedIcon sx={{ fontSize:'30px' }} />
+            <AccountCircleRoundedIcon sx={{ fontSize:'0px' }} />
           ) : ( currentUser &&
             <img style={{width:'40px',height:'40px',borderRadius:"50%"}}
               src={`${networkImage}/${removePublicPath(currentUser.user.img)}`}

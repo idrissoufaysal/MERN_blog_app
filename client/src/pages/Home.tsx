@@ -28,7 +28,7 @@ export interface Post {
 export default function Home() {
   const [post, setPost] = useState([]);
   const { currentUser } = useAuth();
-  const { addOrRemoveFavorite, favorie, status } = useFavoriteStore();
+  const { addOrRemoveFavorite, favorie } = useFavoriteStore();
 
   //fonction
   function removePublicPath(imgPath: string | undefined) {
