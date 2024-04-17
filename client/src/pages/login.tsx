@@ -50,8 +50,8 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement>)=>{
         <h2>Connectez-vous</h2>
             <div className="form">
 
-           <input type="text" onChange={handlChange} name="email" required />
-           <input type="password" onChange={handlChange} name="password" required/>
+           <input type="text" placeholder="Email" onChange={handlChange} name="email" required />
+           <input type="password" placeholder="Password" onChange={handlChange} name="password" required/>
            <button onClick={handleSubmit}>Se connecter</button>
            <p>vous n'avez pas de compte ? <Link className="links" to='/register'>Creer un compte</Link></p>
             </div>
