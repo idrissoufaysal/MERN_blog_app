@@ -4,8 +4,9 @@ import Axios from "../utils/fecth";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import useFavoriteStore from "../states/favoris";
 import { useAuth } from "../context/authContext";
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import truncateDescription from "../utils/function";
+import useCategorie from "../states/categorie";
 // import { AxiosError } from "axios";
 
 export interface Post {
@@ -29,6 +30,7 @@ export default function Home() {
   const [post, setPost] = useState([]);
   const { currentUser } = useAuth();
   const { addOrRemoveFavorite, favorie } = useFavoriteStore();
+  const {selectedCategory}=useCategorie()
 
   //fonction
   function removePublicPath(imgPath: string | undefined) {
@@ -51,7 +53,11 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const res = await Axios.get(`/post`, { headers: {} });
+      const res = await Axios.get(`/post`, {
+        params: {
+          category: selectedCategory !== "all" ? selectedCategory : undefined,
+        },
+      });
       setPost(res.data);
       console.log(res.data);
     } catch (error) {
@@ -60,7 +66,9 @@ export default function Home() {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+    console.log(selectedCategory);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory]);
 
   const networkImage: string = "http://localhost:4000";
   return (
@@ -71,11 +79,17 @@ export default function Home() {
             <div className="postHeader">
               <Link to={`/user/${post.user.id}`} className="links">
                 <div className="userInfo">
-                 {post.user?.img? <img
-                    className="img"
-                    src={`${networkImage}/${removePublicPath(post.user?.img)}`}
-                    alt={post.user?.username}
-                  />:<AccountCircleRoundedIcon fontSize="large"/>}
+                  {post.user?.img ? (
+                    <img
+                      className="img"
+                      src={`${networkImage}/${removePublicPath(
+                        post.user?.img
+                      )}`}
+                      alt={post.user?.username}
+                    />
+                  ) : (
+                    <AccountCircleRoundedIcon fontSize="large" />
+                  )}
                   <span>{post.user?.username}</span>
                 </div>
               </Link>
@@ -98,7 +112,7 @@ export default function Home() {
                       id: 0,
                       createdAt: "",
                       updatedAt: "",
-                      post: post
+                      post: post,
                     },
                     currentUser?.token
                   );

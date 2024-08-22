@@ -111,7 +111,7 @@ event.preventDefault()
       </div>
     </Link>
     
-    <Button variant="outlined" onClick={(event)=> deleFav(event,f.postId,f.post)} color="error">
+    <Button variant="outlined" onClick={(event)=> deleFav(event,f.postId,f.post as Post)} color="error">
       Retirer
     </Button>
      </div>

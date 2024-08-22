@@ -4,10 +4,12 @@ import { useAuth } from "../context/authContext";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import useCategorie from "../states/categorie";
 
 
 function Header() {
   const { currentUser, logout } = useAuth();
+  const {setSelectedCategorie}=useCategorie()
   const navigate = useNavigate();
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -34,18 +36,18 @@ function Header() {
       </div>
 
       <div className="cat">
-        <Link to="/posts?category=Dart" className="links">
+        <button onClick={()=>setSelectedCategorie('Dart')} className="links">
           <h6>Dart</h6>
-        </Link>
-        <Link to="/posts?category=Javascript" className="links">
+        </button>
+        <button onClick={()=>setSelectedCategorie('Javascript')} className="links">
           <h6>Javascript</h6>
-        </Link>
-        <Link to="/posts?category=Python" className="links">
+        </button>
+        <button onClick={()=>setSelectedCategorie('Python')} className="links">
           <h6>Python</h6>
-        </Link>
-        <Link to="/posts?category=Autre" className="links">
+        </button>
+        <button onClick={()=>setSelectedCategorie('Autre')} className="links">
           <h6>Autre</h6>
-        </Link>
+        </button>
 
         {currentUser ? (
           <div>
