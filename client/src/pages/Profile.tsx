@@ -39,7 +39,7 @@ export default function Profile() {
   const { favorie, fetchFavorites,addOrRemoveFavorite } = useFavoriteStore();
 
   function removePublicPath(imgPath: string | undefined) {
-    return imgPath?.replace("public\\", "");
+    return imgPath?.replace("public", "");
   }
   const networkImage: string = "http://localhost:4000";
 

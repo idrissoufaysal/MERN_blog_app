@@ -32,7 +32,7 @@ export default function Home() {
 
   //fonction
   function removePublicPath(imgPath: string | undefined) {
-    return imgPath?.replace("public\\", "");
+    return imgPath?.replace("public", "");
   }
 
   const getText = (html: string): string => {
@@ -44,7 +44,7 @@ export default function Home() {
       (favorite) =>
         favorite.postId === pId && favorite.userId === currentUser?.user.id
     );
-    console.log(existing);
+    //console.log(existing);
 
     return existing;
   };

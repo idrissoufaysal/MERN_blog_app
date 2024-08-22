@@ -22,7 +22,7 @@ function Single() {
  
 
   function removePublicPath(imgPath: string | undefined) {
-    return imgPath?.replace("public\\", "");
+    return imgPath?.replace("public", "");
   }
 
   const handleClose = () => {

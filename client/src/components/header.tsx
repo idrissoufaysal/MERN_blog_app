@@ -20,7 +20,7 @@ function Header() {
   };
 
   function removePublicPath(imgPath: string | undefined) {
-    return imgPath?.replace("public\\", "");
+    return imgPath?.replace("public", "");
   }
   const networkImage: string = "http://localhost:4000";
 
