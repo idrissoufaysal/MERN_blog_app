@@ -3,13 +3,12 @@ import logo from "../assets/images/Red Purple Modern Minimalist Initial AS Lette
 import { useAuth } from "../context/authContext";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import useCategorie from "../states/categorie";
-
 
 function Header() {
   const { currentUser, logout } = useAuth();
-  const {setSelectedCategorie}=useCategorie()
+  const { setSelectedCategorie } = useCategorie();
   const navigate = useNavigate();
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -26,26 +25,31 @@ function Header() {
   }
   const networkImage: string = "http://localhost:4000";
 
-
   return (
     <div className="header">
       <div className="logo">
-        <Link to="/">
+        <Link to="/" onClick={() => setSelectedCategorie(null)}>
           <img src={logo} alt="" width={90} />
         </Link>
       </div>
 
       <div className="cat">
-        <button onClick={()=>setSelectedCategorie('Dart')} className="links">
+        <button onClick={() => setSelectedCategorie("Dart")} className="links">
           <h6>Dart</h6>
         </button>
-        <button onClick={()=>setSelectedCategorie('Javascript')} className="links">
+        <button
+          onClick={() => setSelectedCategorie("Javascript")}
+          className="links"
+        >
           <h6>Javascript</h6>
         </button>
-        <button onClick={()=>setSelectedCategorie('Python')} className="links">
+        <button
+          onClick={() => setSelectedCategorie("Python")}
+          className="links"
+        >
           <h6>Python</h6>
         </button>
-        <button onClick={()=>setSelectedCategorie('Autre')} className="links">
+        <button onClick={() => setSelectedCategorie("Autre")} className="links">
           <h6>Autre</h6>
         </button>
 
@@ -65,16 +69,28 @@ function Header() {
               </Button>
             </Link>
             <Link className="links" to={`/profile/${currentUser.user.id}`}>
-              <div className="userInfo" style={{display:'flex',alignItems:'center'}}>
-              {!currentUser?.user.img ? (
-            <AccountCircleRoundedIcon sx={{ fontSize:'0px' }} />
-          ) : ( currentUser &&
-            <img style={{width:'40px',height:'40px',borderRadius:"50%"}}
-              src={`${networkImage}/${removePublicPath(currentUser.user.img)}`}
-              alt=""
-            />
-          )}
-              <h6>{currentUser?.user.email}</h6>
+              <div
+                className="userInfo"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                {!currentUser?.user.img ? (
+                  <AccountCircleRoundedIcon sx={{ fontSize: "0px" }} />
+                ) : (
+                  currentUser && (
+                    <img
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%",
+                      }}
+                      src={`${networkImage}/${removePublicPath(
+                        currentUser.user.img
+                      )}`}
+                      alt=""
+                    />
+                  )
+                )}
+                <h6>{currentUser?.user.email}</h6>
               </div>
             </Link>
             <Button

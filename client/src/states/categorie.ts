@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 interface CategoryStore {
-  selectedCategory: string;
-  setSelectedCategorie: (cat: string) => void;
+  selectedCategory: string | null;
+  setSelectedCategorie: (cat: string | null) => void;
 }
 
 const useCategorie = create<CategoryStore>((set) => ({

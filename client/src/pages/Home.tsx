@@ -53,13 +53,19 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const res = await Axios.get(`/post`, {
-        params: {
-          category: selectedCategory !== "all" ? selectedCategory : undefined,
-        },
-      });
-      setPost(res.data);
-      console.log(res.data);
+      let res
+      if(selectedCategory){
+
+        res = await Axios.get(`/post/?category=${selectedCategory}`, {
+          // params: {
+          //   category: selectedCategory !== 'null' ? selectedCategory : null,
+          // },
+        });
+      }else{
+        res = await Axios.get("/post");
+      }
+      setPost(res?.data);
+      console.log(res?.data);
     } catch (error) {
       console.log(error);
     }

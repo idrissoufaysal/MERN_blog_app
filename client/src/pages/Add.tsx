@@ -18,9 +18,14 @@ export default function Add() {
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [category, setCategory] = useState("all");
   const [open, setOpen] = useState(false);
 
   const [img, setImg] = useState<File | string>("");
+
+  const handleCategoryChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.target.value);
+  };
 
   // const handleChange = async (event: {
   //   target: { value: string; name: string };
@@ -39,6 +44,7 @@ export default function Add() {
   const formData = new FormData();
   formData.append("title", title);
   formData.append("desc", desc);
+  formData.append("category", category);
   formData.append("image", img);
 
   const handleSubmite = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -115,20 +121,20 @@ export default function Add() {
         </div>
         <div className="cat">
           <h1>Categorie</h1>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="flutter" id="flutter" />
-            Flutter
+          <label htmlFor="dart">
+            <input type="radio" name="cat" value="Dart" id="dart" onChange={handleCategoryChange} />
+            Dart
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="node" id="node" />
-            Node
+          <label htmlFor="javascript">
+            <input type="radio" name="cat" value="Javascript" id="node" onChange={handleCategoryChange} />
+            Javascript
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="react" id="react" />
-            React
+          <label htmlFor="python">
+            <input type="radio" name="cat" value="Python" id="react" onChange={handleCategoryChange}/>
+            Python
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="autre" id="autre" />
+          <label htmlFor="autre">
+            <input type="radio" name="cat" value="Autre" id="autre" onChange={handleCategoryChange} />
             Autre
           </label>
         </div>
