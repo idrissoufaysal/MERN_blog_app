@@ -13,6 +13,10 @@ const Post = sequelize.define("posts", {
   img: {
     type: DataTypes.STRING,
   },
+  category: {
+    type: DataTypes.ENUM('Dart', 'Javascript', 'Python', 'Autre','Php'), // Les valeurs possibles
+    allowNull: false,
+  },
 });
 
 module.exports = Post;

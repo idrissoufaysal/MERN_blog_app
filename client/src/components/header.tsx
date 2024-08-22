@@ -34,16 +34,16 @@ function Header() {
       </div>
 
       <div className="cat">
-        <Link to="/dart" className="links">
+        <Link to="/posts?category=Dart" className="links">
           <h6>Dart</h6>
         </Link>
-        <Link to="" className="links">
+        <Link to="/posts?category=Javascript" className="links">
           <h6>Javascript</h6>
         </Link>
-        <Link to="" className="links">
+        <Link to="/posts?category=Python" className="links">
           <h6>Python</h6>
         </Link>
-        <Link to="" className="links">
+        <Link to="/posts?category=Autre" className="links">
           <h6>Autre</h6>
         </Link>
 

@@ -7,9 +7,16 @@ const upload = require("../utils/uploadFile.js");
 const { json } = require("sequelize");
 const authenticateUser = require("../utils/jwtAuth.js");
 
+
+//Afficher tous les post
 router.get("/", async (req, res) => {
+
+  const {category}=req.query
   try {
     const post = await Post.findAll({
+      where: {
+        category:category? category: null
+      },
       include: {
         model: User,
         attributes: ["id", "username", "email", "telephone", "img"],
