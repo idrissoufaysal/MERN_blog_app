@@ -1,10 +1,7 @@
-import {  ReactNode, createContext, useEffect, useState } from "react";
 import Axios from "../utils/fecth";
+import { AxiosError } from "axios";
+import { create } from "zustand";
 
-type Input={
-  email:string,
- password:string
-}
 export type User = {
   user: {
     id: number;
@@ -18,43 +15,72 @@ export type User = {
   token: string;
 };
 
-interface AuthContextProps {
-  children: ReactNode;
-}
-
-export interface AuthContextValue {
-  currentUser: User |null ;
-  login: (inputs: Input) => Promise<void>;
-  logout: (inputs: User |null) => Promise<void>;
-}
-
-export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
-
-export const AuthContextProvider = ({ children}:AuthContextProps) => {
-  const storedUser = localStorage.getItem("user");
-  const initialUser = storedUser ? JSON.parse(storedUser) : null;
-
-  const [currentUser, setCurrenUser] = useState<User |null>(initialUser);
-
-  const login = async (inputs: Input) => {
-    const res = await Axios.post("/auth/login", inputs);
-    setCurrenUser(res.data);
-  };
-
-  const logout = async (inputs: User |null) => {
-    await Axios.post("/auth/logout", inputs);
-    setCurrenUser(null);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
-  }, [currentUser]);
-
-  return (
-    <AuthContext.Provider value={{currentUser, login, logout}}>
-      {children}
-    </AuthContext.Provider>
-  );
+export type Inputs = {
+  username?: string;
+  email: string;
+  password: string;
 };
 
-export default AuthContext
+interface AuthStore {
+  currentUser: User | null;
+  loading: boolean;
+  status: boolean;
+  error: string | null | Error;
+  login: (inputs: Inputs) => Promise<void>;
+  logout: (user: User | null) => Promise<void>;
+  register: (inputs: Inputs) => Promise<void>;
+}
+const storedUser = localStorage.getItem("currentUser");
+const initialUser: User = storedUser ? JSON.parse(storedUser) : null;
+
+export const useAuth = create<AuthStore>((set) => ({
+  currentUser: initialUser,
+  loading: false,
+  error: null,
+  status: false,
+
+  login: async (inputs: Inputs) => {
+    set({ loading: true, error: null, status: false });
+    try {
+      const res = await Axios.post("/auth/login", inputs);
+      set({ currentUser: res.data });
+      if (res.status == 200) {
+        set({ status: true });
+      }
+      console.log(res.status);
+      localStorage.setItem("currentUser", JSON.stringify(res.data));
+      set({ loading: false });
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        set({ error: e.response?.data });
+      }
+    }
+  },
+
+  register: async (inputs) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await Axios.post("/auth/register", inputs);
+      res.status == 200 && set({ status: true });
+      console.log(res.data);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        set({ error: e.response?.data });
+      }
+    }
+  },
+
+  logout: async (inputs) => {
+    set({ loading: true, error: null });
+    try {
+      await Axios.post("/auth/logout", inputs);
+      set({ currentUser: null, loading: false });
+      localStorage.removeItem("currentUser");
+    } catch (e) {
+      console.log(e);
+      if (e instanceof AxiosError) {
+        set({ error: e.response?.data });
+      }
+    }
+  },
+}));

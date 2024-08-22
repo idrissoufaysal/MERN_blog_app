@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/Red Purple Modern Minimalist Initial AS Letter Logo (1).png";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';

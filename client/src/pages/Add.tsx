@@ -2,12 +2,11 @@ import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Axios from "../utils/fecth";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useNavigate } from "react-router-dom";
 import SnackbarAlert from "../utils/Snackbar";
-
 
 export default function Add() {
   // const [value, setValue] = useState({
@@ -51,12 +50,10 @@ export default function Add() {
         },
       });
       console.log(res);
-      setOpen(true)
+      setOpen(true);
       setTimeout(() => {
-      
         navigate("/");
       }, 2000);
-
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +61,15 @@ export default function Add() {
 
   return (
     <div className="add">
-      {open && <SnackbarAlert message="Post ajouter avec succes" severity="success" onClose={()=>{setOpen(false)}}/>}
+      {open && (
+        <SnackbarAlert
+          message="Post ajouter avec succes"
+          severity="success"
+          onClose={() => {
+            setOpen(false);
+          }}
+        />
+      )}
       <div className="content">
         <input
           type="text"
@@ -99,8 +104,13 @@ export default function Add() {
             startIcon={<CloudUploadIcon />}
             //
           >
-            <input type="file" name="file" id="file" className="uploadFile" onChange={handleFile} />
-           
+            <input
+              type="file"
+              name="file"
+              id="file"
+              className="uploadFile"
+              onChange={handleFile}
+            />
           </Button>
         </div>
         <div className="cat">

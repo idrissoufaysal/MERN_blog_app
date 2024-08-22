@@ -8,7 +8,6 @@ import Home from "./pages/Home";
 import Add from "./pages/Add";
 import Single from "./pages/Single";
 import UserInfo from "./pages/UserInfo";
-import { AuthContextProvider } from "./context/authContext";
 import Update from "./pages/update";
 import Profile from "./pages/Profile";
 
@@ -50,7 +49,7 @@ function App() {
         },
         {
           path: "/profile/:userId",
-          element: <Profile/>,
+          element: <Profile />,
         },
         {
           path: "/",
@@ -71,9 +70,7 @@ function App() {
   return (
     <div className="app">
       <div className="container">
-        <AuthContextProvider>
-          <RouterProvider router={router} />
-        </AuthContextProvider>
+        <RouterProvider router={router} />
       </div>
     </div>
   );

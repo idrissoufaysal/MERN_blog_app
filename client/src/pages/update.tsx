@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Axios from "../utils/fecth";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useLocation, useNavigate } from "react-router-dom";

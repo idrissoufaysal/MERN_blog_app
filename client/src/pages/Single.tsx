@@ -5,7 +5,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Post } from "./Home";
 import { useEffect, useState } from "react";
 import Axios from "../utils/fecth";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import SnackbarAlert from "../utils/Snackbar";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 

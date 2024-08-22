@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Axios from "../utils/fecth";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import useFavoriteStore from "../states/favoris";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import truncateDescription from "../utils/function";
 // import { AxiosError } from "axios";
@@ -117,7 +117,7 @@ export default function Home() {
               <div className="postContent">
                 <img
                   src={`${networkImage}/${removePublicPath(post.img)}`}
-                  alt=""
+                  alt={post.title}
                 />
                 <div className="content">
                   <h2>{post.title}</h2>

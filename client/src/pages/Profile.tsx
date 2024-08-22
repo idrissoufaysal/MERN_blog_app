@@ -2,7 +2,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Link, useLocation } from "react-router-dom";
 import Axios from "../utils/fecth";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/userHook";
+import { useAuth } from "../context/authContext";
 import useFavoriteStore, {  } from "../states/favoris";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import truncateDescription from "../utils/function";
