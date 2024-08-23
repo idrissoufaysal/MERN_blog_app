@@ -34,9 +34,12 @@ function Header() {
       </div>
 
       <div className="cat">
-        <button onClick={() => setSelectedCategorie("Dart")} className="links">
+        <button 
+          onClick={() => setSelectedCategorie("Dart")} 
+          className="links">
           <h6>Dart</h6>
         </button>
+        
         <button
           onClick={() => setSelectedCategorie("Javascript")}
           className="links"
