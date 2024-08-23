@@ -6,7 +6,7 @@ interface CategoryStore {
 }
 
 const useCategorie = create<CategoryStore>((set) => ({
-  selectedCategory: "all",
+  selectedCategory: null,
   setSelectedCategorie: (cate) => set({ selectedCategory: cate }),
 }));
 

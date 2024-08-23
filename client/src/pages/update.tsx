@@ -8,8 +8,6 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useLocation, useNavigate } from "react-router-dom";
 import SnackbarAlert from "../utils/Snackbar";
 
-
-
 export default function Update() {
   // const [value, setValue] = useState({
   //   title: "",
@@ -17,12 +15,13 @@ export default function Update() {
   // });
 
   const navigate = useNavigate();
-  const location=useLocation();
+  const location = useLocation();
   const { currentUser } = useAuth();
   const postId = location.pathname.split("/")[2];
   //const [post, setPost] = useState<Post>();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [category, setCategory] = useState("Dart");
   const [open, setOpen] = useState(false);
 
   const [img, setImg] = useState<File | string>("");
@@ -41,9 +40,14 @@ export default function Update() {
     //  const file = event.target.files[0].toString();
   }
 
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.target.value);
+  };
+
   const formData = new FormData();
   formData.append("title", title);
   formData.append("desc", desc);
+  formData.append("category", category);
   formData.append("image", img);
 
   const handleSubmite = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -55,14 +59,12 @@ export default function Update() {
         },
       });
       console.log(res);
-      setOpen(true)
+      setOpen(true);
       console.log(res.data);
-      
-      setTimeout(() => {
-      
-        navigate("/post/"+postId);
-      }, 2000);
 
+      setTimeout(() => {
+        navigate("/post/" + postId);
+      }, 2000);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +77,6 @@ export default function Update() {
         setDesc(res.data.desc);
         setImg(res.data.img);
         console.log(res.data);
-        
       } catch (error) {
         console.log(error);
       }
@@ -83,22 +84,29 @@ export default function Update() {
     fetchData();
   }, [postId]);
 
-
   return (
     <div className="add">
-      {open && <SnackbarAlert message="Post mise a jour avec succes" severity="success" onClose={()=>{setOpen(false)}}/>}
+      {open && (
+        <SnackbarAlert
+          message="Post mise a jour avec succes"
+          severity="success"
+          onClose={() => {
+            setOpen(false);
+          }}
+        />
+      )}
       <div className="content">
         <input
           type="text"
           placeholder="title"
           value={title}
-          onChange={(e)=>setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
         <div className="editorContainer">
           <ReactQuill
             className="editor"
             theme="snow"
-           value={desc}
+            value={desc}
             onChange={(value: string) => {
               setDesc(value);
             }}
@@ -113,33 +121,62 @@ export default function Update() {
             role={undefined}
             variant="outlined"
             sx={{
-                border: "2px solid #a158b1",
-                color: "#a158b1",
+              border: "2px solid #a158b1",
+              color: "#a158b1",
             }}
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
             //
           >
-            <input type="file" name="file" className="uploadFile"  id="file" onChange={handleFile} />
-            
+            <input
+              type="file"
+              name="file"
+              className="uploadFile"
+              id="file"
+              onChange={handleFile}
+            />
           </Button>
         </div>
         <div className="cat">
           <h1>Categorie</h1>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="flutter" id="flutter" />
-            Flutter
+          <label htmlFor="dart">
+            <input
+              type="radio"
+              name="cat"
+              value="Dart"
+              id="dart"
+              onChange={handleCategoryChange}
+            />
+            Dart
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="node" id="node" />
-            Node
+          <label htmlFor="javascript">
+            <input
+              type="radio"
+              name="cat"
+              value="Javascript"
+              id="node"
+              onChange={handleCategoryChange}
+            />
+            Javascript
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="react" id="react" />
-            React
+          <label htmlFor="python">
+            <input
+              type="radio"
+              name="cat"
+              value="Python"
+              id="react"
+              onChange={handleCategoryChange}
+            />
+            Python
           </label>
-          <label htmlFor="flutter">
-            <input type="radio" name="cat" value="autre" id="autre" />
+          <label htmlFor="autre">
+            <input
+              type="radio"
+              name="cat"
+              value="Autre"
+              id="autre"
+              onChange={handleCategoryChange}
+            />
             Autre
           </label>
         </div>

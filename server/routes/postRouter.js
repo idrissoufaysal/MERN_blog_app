@@ -99,7 +99,6 @@ router.put(
         desc: desc,
         category: category,
         img: req.file? req.file.path : existingPost.img,
-        img: req.file ? req.file.path : existingPost.img,
         userId: req.userInfo.id,
       });
       res.status(200).json("Post mise a jour avec succes");
